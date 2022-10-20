@@ -6,11 +6,14 @@ check_login();
 include("dbconnection.php");
 if(isset($_POST['change']))
 {
- $sql=mysqli_query($con,"SELECT password FROM  user where password='".$_POST['oldpass']."' && email='".$_SESSION['login']."'");
+  $oldpas=$_POST['oldpass'];
+  $adminid=$_SESSION['id'];
+  $newpassword=$_POST['newpass'];
+ $sql=mysqli_query($con,"SELECT password FROM  admin where password='$oldpas' && id='$adminid'");
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
- $con=mysqli_query($con,"update  user set password='".$_POST['newpass']."' where email='".$_SESSION['login']."'");
+ $con=mysqli_query($con,"update  admin set password='$newpassword' where id='$adminid'");
 $_SESSION['msg1']="Password Changed Successfully !!";
 //header('location:user.php');
 }
@@ -31,15 +34,15 @@ $_SESSION['msg1']="Old Password not match !!";
 <meta content="" name="description" />
 <meta content="" name="author" />
 
-<link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/css/responsive.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
 <script language="javascript" type="text/javascript">
 function valid()
 {
@@ -161,26 +164,21 @@ return true;
 		</div>
     </div>
   </div>
-  
-<!-- BEGIN CHAT --> 
 
-
-       
-    </div>
 </div>
  </div>
-<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
-<script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
-<script src="assets/plugins/breakpoints.js" type="text/javascript"></script> 
-<script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
-<script src="assets/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script> 
-<script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
-<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>  
-<script src="assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
-<script src="assets/js/core.js" type="text/javascript"></script> 
-<script src="assets/js/chat.js" type="text/javascript"></script> 
-<script src="assets/js/demo.js" type="text/javascript"></script> 
+<script src="../assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
+<script src="../assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="../assets/plugins/breakpoints.js" type="text/javascript"></script> 
+<script src="../assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
+<script src="../assets/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script> 
+<script src="../assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/pace/pace.min.js" type="text/javascript"></script>  
+<script src="../assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+<script src="../assets/js/core.js" type="text/javascript"></script> 
+<script src="../assets/js/chat.js" type="text/javascript"></script> 
+<script src="../assets/js/demo.js" type="text/javascript"></script> 
 
 </body>
 </html>

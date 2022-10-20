@@ -1,80 +1,101 @@
+<?php
+session_start();
+error_reporting(0);
+include("dbconnection.php");
+if(isset($_POST['login']))
+{
+$ret=mysqli_query($con,"SELECT * FROM admin WHERE name='".$_POST['email']."' and password='".$_POST['password']."'");
+$num=mysqli_fetch_array($ret);
+if($num>0)
+{
+$extra="home.php";
+$_SESSION['alogin']=$_POST['email'];
+$_SESSION['id']=$num['id'];
+echo "<script>window.location.href='".$extra."'</script>";
+exit();
+}
+else
+{
+$_SESSION['action1']="*Invalid username or password";
+$extra="index.php";
+
+echo "<script>window.location.href='".$extra."'</script>";
+exit();
+}
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>CRM Project using PHP and MySQL</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/one-page-wonder.min.css" rel="stylesheet">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta charset="utf-8" />
+<title>CRM | Admin Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
 
 </head>
+<body class="error-body no-top">
+<div class="container">
+  <div class="row login-container column-seperation">  
+        <div class="col-md-5 col-md-offset-1">
+          <h2>Sign in to CRM Admin</h2>
+         
+          <br>
 
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">CRM</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="registration.php">User Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">User Log In</a>
-          </li>
-
-            <li class="nav-item">
-            <a class="nav-link" href="admin/">Admin</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <header class="masthead text-center text-white">
-    <div class="masthead-content">
-      <div class="container">
-        <h1 class="masthead-heading mb-0">Small CRM</h1>
-        <h2 class="masthead-subheading mb-0">Developed using PHP & MySQL</h2>
-        <a href="registration.php" class="btn btn-primary btn-xl rounded-pill mt-5">User Signup</a>
-      </div>
-    </div>
-    <div class="bg-circle-1 bg-circle"></div>
-    <div class="bg-circle-2 bg-circle"></div>
-    <div class="bg-circle-3 bg-circle"></div>
-    <div class="bg-circle-4 bg-circle"></div>
-  </header>
-
-
-  <!-- Footer -->
-  <footer class="py-5 bg-black">
-    <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; PHPGurukul CRM 2021</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+		   
+        </div>
+        <div class="col-md-5 "> <br>
+		 <form id="login-form" class="login-form" action="" method="post">
+         <p style="color: #F00"><?php echo $_SESSION['action1'];?><?php echo $_SESSION['action1']="";?></p>
+		 <div class="row">
+		 <div class="form-group col-md-10">
+            <label class="form-label">Username</label>
+            <div class="controls">
+				<div class="input-with-icon  right">                                       
+					<i class=""></i>
+					<input type="text" name="email" id="txtusername" class="form-control">                                 
+				</div>
+            </div>
+          </div>
+          </div>
+		  <div class="row">
+          <div class="form-group col-md-10">
+            <label class="form-label">Password</label>
+            <span class="help"></span>
+            <div class="controls">
+				<div class="input-with-icon  right">                                       
+					<i class=""></i>
+					<input type="password" name="password" id="txtpassword" class="form-control">                                 
+				</div>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <button class="btn btn-primary btn-cons pull-right" name="login" type="submit">Login</button>
+            </div>
+          </div>
+		  </form>
+        </div>
+     
+    
+  </div>
+</div>
+<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="assets/js/login.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+	<script type="text/javascript" src="js/exporting.js"></script>	
 </body>
-
 </html>
